@@ -11,15 +11,9 @@
     <button id="button">提交</button>
     <script>
       button.addEventListener('click', (e) => {
-        var img = document.createElement('img')
-        var hash = Math.random()
-        img.src = '/pay?'+hash
-        img.onload = function() {
-          amount.innerText = amount.innerText - 1
-        }
-        img.onerror = function() {
-          alert('fail')
-        }
+        var script = document.createElement('script')
+        script.src = '/pay'
+        document.body.appendChild(script)
       })
     </script>
   </body>
