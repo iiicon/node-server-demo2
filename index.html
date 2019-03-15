@@ -10,22 +10,25 @@
     <div>我的余额:<span id="amount">%%amount%%</span></div>
     <button id="button">提交</button>
     <script>
-
-      function xxx(result) {
-        alert(`${result}`)
-        amount.innerText = result
-      }
-
       button.addEventListener('click', (e) => {
+        var functionName = 'GRE'+parseInt(Math.random()*10000,10)
+        window[functionName] = function (result) {
+          alert(`${result}`)
+          amount.innerText = result
+        }
+        
         var script = document.createElement('script')
-        script.src = '/pay?callback=xxx'
+        script.src = `/pay?callback=${functionName}`
         document.body.appendChild(script)
+        
         script.onload = function (e) {
           e.currentTarget.remove()
+          delete window[functionName]
         }
         script.error = function(e) {
           alert('fail')
           e.currentTarget.remove()
+          delete window[functionName]
         }
       })
     </script>
