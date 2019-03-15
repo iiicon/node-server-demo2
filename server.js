@@ -41,9 +41,11 @@ var server = http.createServer(function(request, response) {
     var amount = fs.readFileSync('./db', 'utf8')
     var newAmount = amount - 1
     fs.writeFileSync('./db', newAmount, 'utf8')
-    response.setHeader('Content-Type', 'image/jpeg')
+    response.setHeader('Content-Type', 'application/javascript')
     response.statusCode = 200
-    response.write(fs.readFileSync('./girl.jpeg'))
+    response.write(
+      `amount.innerText = amount.innerText - 1`
+    )
     response.end()
   }
   else {

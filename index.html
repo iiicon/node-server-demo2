@@ -14,6 +14,9 @@
         var script = document.createElement('script')
         script.src = '/pay'
         document.body.appendChild(script)
+        script.error = function() {
+          alert('fail')
+        }
       })
     </script>
   </body>
