@@ -16,7 +16,6 @@ var server = http.createServer(function(request, response) {
     queryString = pathWithQuery.substring(pathWithQuery.indexOf('?'))
   }
   var path = parsedUrl.pathname
-  console.log('path is '+path)
   var query = parsedUrl.query
   var method = request.method
 
@@ -43,9 +42,9 @@ var server = http.createServer(function(request, response) {
     fs.writeFileSync('./db', newAmount, 'utf8')
     response.setHeader('Content-Type', 'application/javascript')
     response.statusCode = 200
-    response.write(
-      `amount.innerText = amount.innerText - 1`
-    )
+    response.write(`
+      ${query.callback}.call(null, ${newAmount})
+    `)
     response.end()
   }
   else {

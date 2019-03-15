@@ -10,9 +10,15 @@
     <div>我的余额:<span id="amount">%%amount%%</span></div>
     <button id="button">提交</button>
     <script>
+
+      function xxx(result) {
+        alert(`${result}`)
+        amount.innerText = result
+      }
+
       button.addEventListener('click', (e) => {
         var script = document.createElement('script')
-        script.src = '/pay'
+        script.src = '/pay?callback=xxx'
         document.body.appendChild(script)
         script.onload = function (e) {
           e.currentTarget.remove()
